@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 
 def extract_wwr_jobs(keyword):
   url = f"https://weworkremotely.com/remote-jobs/search?term={keyword}"
-
   response = get(url)
 
   if response.status_code != 200:
@@ -19,17 +18,14 @@ def extract_wwr_jobs(keyword):
       for post in job_posts:
         anchor = post.find_all('a')[1]
         link = anchor['href']
-        company, kind, region = anchor.find_all('span', class_='company')
-        title = anchor.find('span', class_='title').string.encode('utf-8')
+        company, kind, location = anchor.find_all('span', class_='company')
+        title = anchor.find('span', class_='title')
         job_data = {
           'company' : company.string,
           'kind' : kind.string,
-          'region' : region.string,
-          'position' : str(title).lstrip('b').strip('\''),
+          'location' : location.string,
+          'position' : title.string,
           'link' : f"https://weworkremotely.com{link}"
         }
         results.append(job_data)
     return results
-
-    print(type(anchor))
-    print(anchor)
