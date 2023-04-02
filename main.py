@@ -26,11 +26,12 @@ else:
         'kind' : kind.string,
         'region' : region.string,
         'position' : str(title).lstrip('b').strip('\''),
-        'link' : link
+        'link' : f"https://weworkremotely.com{link}"
       }
       results.append(job_data)
   for result in results:
     print(result)
     print("-----------------------------------------------------")
 
-  print(type(soup))
+  print(type(anchor))
+  print(anchor)
