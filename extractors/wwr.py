@@ -1,7 +1,7 @@
 from requests import get
 from bs4 import BeautifulSoup
 
-def extract_jobs(keyword):
+def extract_wwr_jobs(keyword):
   url = f"https://weworkremotely.com/remote-jobs/search?term={keyword}"
 
   response = get(url)
@@ -29,9 +29,7 @@ def extract_jobs(keyword):
           'link' : f"https://weworkremotely.com{link}"
         }
         results.append(job_data)
-    for result in results:
-      print(result)
-      print("-----------------------------------------------------")
+    return results
 
     print(type(anchor))
     print(anchor)
